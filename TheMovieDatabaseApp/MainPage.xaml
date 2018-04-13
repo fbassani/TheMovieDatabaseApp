@@ -15,9 +15,10 @@
     </ContentPage.Resources>
     <Grid>
         <Image Source="ColoredBackground" VerticalOptions="Fill" HorizontalOptions="Fill" Aspect="Fill"/>
+        <Label Text="Loading..." Style="{StaticResource BodyLabel}" IsVisible="{Binding Movies.NotCompleted}"/>
         <ListView x:Name="MoviesList" 
 		BackgroundColor="Transparent"
-		RowHeight="200" ItemsSource="{Binding Movies}" SeparatorVisibility="None">
+		RowHeight="200" ItemsSource="{Binding Movies.Result}" SeparatorVisibility="None">
             <ListView.Behaviors>
                 <behaviors:MovieSelectedBehavior Command="{Binding MovieSelectedCommand}" Converter="{StaticResource SelectedItemConverter}" />
             </ListView.Behaviors>
@@ -30,7 +31,8 @@
                                 <RowDefinition Height="AUTO"/>
                             </Grid.RowDefinitions>
 
-                            <Image Source="{Binding PosterUrl}" Aspect="AspectFill" Grid.RowSpan="2" />
+
+                            <Image Source="{Binding PosterUrl}" Aspect="AspectFill" Grid.RowSpan="2"/>
                             <Image Source="ShadowOverlay" Grid.RowSpan="2"  Aspect="Fill" VerticalOptions="End" HorizontalOptions="Fill" />
 
                             <Grid Margin="10" RowSpacing="10" ColumnSpacing="10" Grid.Row="1">

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using TheMovieDatabaseApp.Model;
 using TheMovieDatabaseApp.Service;
@@ -8,14 +9,24 @@ namespace TheMovieDatabaseApp.ViewModel
 {
     public class MainPageViewModel
     {
-        public ICommand MovieSelectedCommand { get; set; }
-        public ObservableCollection<Movie> Movies { get; set; }
+        private readonly IMovieDataSource _movieDataSource;
 
-        public MainPageViewModel(INavigation navigation)
+        public ICommand MovieSelectedCommand { get; set; }
+
+        public TaskRunWrapper<List<Movie>> Movies { get; set; }
+
+        public MainPageViewModel(INavigation navigation) : this(navigation, new MovieDataSource(new MovieFinder())) { }
+
+        public MainPageViewModel(INavigation navigation, IMovieDataSource movieDataSource)
         {
-            var datasource = new MovieDataSource(new MovieFinder());
-            Movies = new ObservableCollection<Movie>(datasource.GetMovies());
+            _movieDataSource = movieDataSource;
+            Movies = new TaskRunWrapper<List<Movie>>(GetMovies());
             MovieSelectedCommand = new Command<Movie>(async m => await navigation.PushAsync(new DetailsPage(m)));
+        }
+
+        private async Task<List<Movie>> GetMovies()
+        {
+            return await _movieDataSource.GetMovies();
         }
     }
 }
