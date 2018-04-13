@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:local="clr-namespace:TheMovieDatabaseApp"
+	xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+	xmlns:converters="clr-namespace:TheMovieDatabaseApp.Converters;assembly=TheMovieDatabaseApp"
+	xmlns:behaviors="clr-namespace:TheMovieDatabaseApp.Behaviors;assembly=TheMovieDatabaseApp"
+	BackgroundColor="Black"
+	Title = "The Movie Database"
+	x:Class="TheMovieDatabaseApp.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
+        <Image Source="ColoredBackground" VerticalOptions="Fill" HorizontalOptions="Fill" Aspect="Fill"/>
+        <ListView x:Name="MoviesList" 
+		BackgroundColor="Transparent"
+		RowHeight="200" ItemsSource="{Binding Movies}" SeparatorVisibility="None">
+            <ListView.Behaviors>
+                <behaviors:MovieSelectedBehavior Command="{Binding MovieSelectedCommand}" Converter="{StaticResource SelectedItemConverter}" />
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid RowSpacing="5" ColumnSpacing="0" Margin="10,5" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="AUTO"/>
+                            </Grid.RowDefinitions>
+
+                            <Image Source="{Binding PosterUrl}" Aspect="AspectFill" Grid.RowSpan="2" />
+                            <Image Source="ShadowOverlay" Grid.RowSpan="2"  Aspect="Fill" VerticalOptions="End" HorizontalOptions="Fill" />
+
+                            <Grid Margin="10" RowSpacing="10" ColumnSpacing="10" Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="AUTO"/>
+                                    <RowDefinition Height="25"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding Title}"  Grid.Row="0" Grid.ColumnSpan="3" Style="{StaticResource TitleLabel}" LineBreakMode="NoWrap"/>
+
+                                <Label Text="{Binding Genre}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Center" Style="{StaticResource GenreAndDateLabel}" />
+
+                                <StackLayout Orientation="Horizontal"  VerticalOptions="Center" Grid.Column="2" Grid.Row="1" Spacing="5">
+                                    <Label Text="Release date" Style="{StaticResource BodyLabel}"/>
+                                    <Label Text="{Binding ReleaseDate, StringFormat='{0:MM/dd/yyyy}'}" Style="{StaticResource GenreAndDateLabel}" />
+                                    
+                                </StackLayout>
+                            </Grid>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>
