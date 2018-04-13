@@ -11,7 +11,7 @@ namespace TheMovieDatabaseApp.ViewModel
     {
         private readonly IMovieDataSource _movieDataSource;
 
-        public ICommand MovieSelectedCommand { get; set; }
+        public ICommand MovieSelectedCommand { get; }
 
         public TaskRunWrapper<List<Movie>> Movies { get; set; }
 

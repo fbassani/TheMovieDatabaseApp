@@ -24,13 +24,19 @@ namespace TheMovieDatabaseApp.ViewModel
 
         private async Task RunTask(Task task)
         {
-            await task;
+            try
+            {
+                await task;
+            }
+            catch { }
+
             OnPropertyChanged(nameof(Result));
             OnPropertyChanged(nameof(IsCompleted));
             OnPropertyChanged(nameof(NotCompleted));
             if (task.IsFaulted)
             {
                 OnPropertyChanged(nameof(IsFaulted));
+                OnPropertyChanged(nameof(Exception));
             }
         }
 

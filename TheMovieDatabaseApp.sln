@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheMovieDatabaseApp", "TheM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheMovieDatabaseApp.Android", "TheMovieDatabaseApp.Android\TheMovieDatabaseApp.Android.csproj", "{6384DA00-A260-43F7-8156-18130F93BAB7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheMovieDatabaseApp.Tests", "TheMovieDatabaseApp.Tests\TheMovieDatabaseApp.Tests.csproj", "{FEC6A390-39E4-41E5-8F62-BA0A1F40AE33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{6384DA00-A260-43F7-8156-18130F93BAB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6384DA00-A260-43F7-8156-18130F93BAB7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6384DA00-A260-43F7-8156-18130F93BAB7}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{FEC6A390-39E4-41E5-8F62-BA0A1F40AE33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEC6A390-39E4-41E5-8F62-BA0A1F40AE33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEC6A390-39E4-41E5-8F62-BA0A1F40AE33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEC6A390-39E4-41E5-8F62-BA0A1F40AE33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
