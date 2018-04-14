@@ -8,11 +8,7 @@ namespace TheMovieDatabaseApp
         {
             InitializeComponent();
 
-            var navigationPage = new NavigationPage(new MainPage())
-            {
-                BarBackgroundColor = Color.Black,
-                BarTextColor = Color.White
-            };
+            var navigationPage = new NavigationPage(new MainPage());
             MainPage = navigationPage;
         }
     }

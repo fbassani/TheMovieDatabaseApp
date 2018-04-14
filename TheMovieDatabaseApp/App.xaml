@@ -46,8 +46,18 @@
                 <Setter Property="FontSize" Value="10" />
             </Style>
 
-        </ResourceDictionary>
+            <Style x:Key="OverviewText" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BodyTextColor}" />
+                <Setter Property="FontFamily" Value="{StaticResource LightFontFamily}" />
+                <Setter Property="FontSize" Value="12" />
+            </Style>
 
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="#323232" />
+                <Setter Property="BarTextColor" Value="White" />
+            </Style>
+
+        </ResourceDictionary>
 
     </Application.Resources>
 </Application>

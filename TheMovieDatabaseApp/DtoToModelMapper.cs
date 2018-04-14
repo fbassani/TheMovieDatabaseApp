@@ -11,20 +11,17 @@ namespace TheMovieDatabaseApp
         //TODO: move to settings
         private const string ImageUrl = "http://image.tmdb.org/t/p/w300/";
 
-        public static IEnumerable<Movie> Map(IEnumerable<MovieDto> movies, IEnumerable<GenreDto> genres)
+        public static List<Movie> Map(IEnumerable<MovieDto> movies, IEnumerable<GenreDto> genres)
         {
-            foreach (var movie in movies)
+            return movies.Select(movie => new Movie
             {
-                yield return new Movie
-                {
-                    BackdropUrl = $"{ImageUrl}{movie.Backdrop_Path}",
-                    PosterUrl = $"{ImageUrl}{movie.Poster_Path}",
-                    Genre = String.Join(", ", genres.Where(g => movie.Genre_Ids.Contains(g.Id)).Select(g => g.Name)),
-                    ReleaseDate = movie.Release_Date,
-                    Overview = movie.Overview,
-                    Title = movie.Original_Title
-                };
-            }
+                BackdropUrl = $"{ImageUrl}{movie.Backdrop_Path}",
+                PosterUrl = $"{ImageUrl}{movie.Poster_Path}",
+                Genre = String.Join(", ", genres.Where(g => movie.Genre_Ids.Contains(g.Id)).Select(g => g.Name)),
+                ReleaseDate = movie.Release_Date,
+                Overview = movie.Overview,
+                Title = movie.Original_Title
+            }).ToList();
         }
     }
 }

@@ -18,6 +18,8 @@ namespace TheMovieDatabaseApp.ViewModel
 
 
         bool _isLoadingMore;
+        private string _firstMovieOfThePageImage;
+
         bool IsLoadingMore
         {
             get
@@ -35,6 +37,16 @@ namespace TheMovieDatabaseApp.ViewModel
 
         public InfiniteScrollCollection<Movie> Movies { get; set; }
 
+        public string FirstMovieOfThePageImage
+        {
+            get => _firstMovieOfThePageImage;
+            set
+            {
+                _firstMovieOfThePageImage = value;
+                OnPropertyChanged(nameof(FirstMovieOfThePageImage));
+            }
+        }
+
 
         public MainPageViewModel(INavigation navigation) : this(navigation, new MovieDataSource(new MovieFinder("https://api.themoviedb.org/3", "1f54bd990f1cdfb230adb312546d765d"), new GenreFinder("https://api.themoviedb.org/3", "1f54bd990f1cdfb230adb312546d765d"))) { }
 
@@ -48,6 +60,7 @@ namespace TheMovieDatabaseApp.ViewModel
                 {
                     IsLoadingMore = true;
                     var movies = await GetMovies();
+                    FirstMovieOfThePageImage = movies[0].BackdropUrl;
                     IsLoadingMore = false;
                     _currentPage++;
                     return movies;

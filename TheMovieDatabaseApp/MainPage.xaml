@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	xmlns:local="clr-namespace:TheMovieDatabaseApp"
-	xmlns:converters="clr-namespace:TheMovieDatabaseApp.Converters;assembly=TheMovieDatabaseApp"
+    xmlns:converters="clr-namespace:TheMovieDatabaseApp.Converters;assembly=TheMovieDatabaseApp"
 	xmlns:behaviors="clr-namespace:TheMovieDatabaseApp.Behaviors;assembly=TheMovieDatabaseApp"
-	BackgroundColor="Black"
+    BackgroundImage="Background"
 	Title = "The Movie Database"
 	x:Class="TheMovieDatabaseApp.MainPage"
     xmlns:scroll="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling">
@@ -14,12 +13,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid>
-        <Image Source="ColoredBackground" VerticalOptions="Fill" HorizontalOptions="Fill" Aspect="Fill"/>
-        <ActivityIndicator Color="White" IsRunning="{Binding Movies.IsLoadingMore}" Margin="150" />
-        <ListView x:Name="MoviesList" 
-		BackgroundColor="Transparent"
-        CachingStrategy="RecycleElement"
-		RowHeight="200" ItemsSource="{Binding Movies}" SeparatorVisibility="None">
+        <ListView x:Name="MoviesList" BackgroundColor="Transparent" CachingStrategy="RecycleElement" RowHeight="200" ItemsSource="{Binding Movies}" SeparatorVisibility="None">
             <ListView.Behaviors>
                 <behaviors:MovieSelectedBehavior Command="{Binding MovieSelectedCommand}" Converter="{StaticResource SelectedItemConverter}" />
                 <scroll:InfiniteScrollBehavior />
@@ -30,25 +24,24 @@
                         <Grid RowSpacing="5" ColumnSpacing="0" Margin="10,5" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
-                                <RowDefinition Height="AUTO"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <Image Aspect="AspectFill" Grid.RowSpan="2">
                                 <Image.Source>
-                                    <UriImageSource Uri="{Binding ImageUrl}" CachingEnabled="True" />
+                                    <UriImageSource Uri="{Binding ImageUrl}" CachingEnabled="True" CacheValidity="5"/>
                                 </Image.Source>
                             </Image>
-                            <Image Source="ShadowOverlay" Grid.RowSpan="2"  Aspect="Fill" VerticalOptions="End" HorizontalOptions="Fill" />
 
                             <Grid Margin="10" RowSpacing="10" ColumnSpacing="10" Grid.Row="1">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="AUTO"/>
+                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="25"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="25"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
                                 <Label Text="{Binding Title}"  Grid.Row="0" Grid.ColumnSpan="3" Style="{StaticResource TitleLabel}" LineBreakMode="NoWrap"/>
@@ -58,7 +51,6 @@
                                 <StackLayout Orientation="Horizontal"  VerticalOptions="StartAndExpand" Grid.Column="2" Grid.Row="1" Spacing="5">
                                     <Label Text="Release date" Style="{StaticResource BodyLabel}"/>
                                     <Label Text="{Binding ReleaseDate, StringFormat='{0:MM/dd/yyyy}'}" Style="{StaticResource GenreAndDateLabel}" />
-
                                 </StackLayout>
                             </Grid>
                         </Grid>
@@ -67,18 +59,12 @@
             </ListView.ItemTemplate>
             <ListView.Footer>
                 <Grid Padding="4" IsVisible="{Binding IsLoadingMore}">
-                    <!-- set the footer to have a zero height when invisible -->
                     <Grid.Triggers>
                         <Trigger TargetType="Grid" Property="IsVisible" Value="False">
                             <Setter Property="HeightRequest" Value="0" />
                         </Trigger>
                     </Grid.Triggers>
-                    <!-- the loading content -->
-                    <ActivityIndicator
-                        IsRunning="true"
-                        Color="Black"
-                        WidthRequest="20"
-                        HeightRequest="20"/>
+                    <ActivityIndicator IsRunning="true" Color="Black" WidthRequest="20" HeightRequest="20"/>
                 </Grid>
             </ListView.Footer>
         </ListView>

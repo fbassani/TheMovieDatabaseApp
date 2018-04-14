@@ -22,8 +22,7 @@ namespace TheMovieDatabaseApp
         {
             _genres = _genres ?? await _genreFinder.GetAll();
             var movies = await _movieFinder.GetPage(page);
-            var result = DtoToModelMapper.Map(movies, _genres);
-            return result.ToList();
+            return DtoToModelMapper.Map(movies, _genres);
         }
     }
 }

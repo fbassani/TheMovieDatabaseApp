@@ -2,25 +2,27 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheMovieDatabaseApp.DetailsPage"
-             BackgroundColor="Black"
-	         Title = "{Binding Title}" >
+             BackgroundImage="Background"
+	         Title = "The Movie Database" >
     <ContentPage.Content>
         <ScrollView>
-            <Grid ColumnSpacing="0" RowSpacing="0">
+            <Grid RowSpacing="5" ColumnSpacing="0" Margin="10,5" >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="AUTO" />
+                    <RowDefinition Height="500"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Image Aspect="AspectFill" Margin="10" Grid.Row="0" >
+                <Image Aspect="AspectFill" Margin="5" Grid.Row="0" >
                     <Image.Source>
-                        <UriImageSource Uri="{Binding PosterUrl}"></UriImageSource>
+                        <UriImageSource Uri="{Binding PosterUrl}" CachingEnabled="True" CacheValidity="5"/>
                     </Image.Source>
                 </Image>
-                <Image Source="ShadowOverlay" Aspect="Fill" VerticalOptions="End" HorizontalOptions="Fill" Grid.RowSpan="2" />
-
-                <StackLayout Orientation="Horizontal"  VerticalOptions="Center"  Grid.Row="1" Spacing="5" Margin="10">
-                    <Label Text="{Binding Summary}" Style="{StaticResource BodyLabel}"/>
+                <StackLayout Orientation="Horizontal"  Grid.Row="1">
+                    <Label Text="{Binding Title}" Style="{StaticResource TitleLabel}" VerticalOptions="StartAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal"  Grid.Row="2" Padding="2">
+                    <Label Text="{Binding Overview}" Style="{StaticResource OverviewText}"/>
                 </StackLayout>
             </Grid>
         </ScrollView>
