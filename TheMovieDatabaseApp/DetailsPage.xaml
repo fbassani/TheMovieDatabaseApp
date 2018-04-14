@@ -8,18 +8,21 @@
         <ScrollView>
             <Grid ColumnSpacing="0" RowSpacing="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="250" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="AUTO" />
                 </Grid.RowDefinitions>
 
-                <Image Source="{Binding PosterUrl}" Aspect="AspectFill" Margin="10"  Grid.Row="0" />
-                <Image Source="ShadowOverlay" Aspect="Fill" VerticalOptions="End" HorizontalOptions="Fill" />
+                <Image Aspect="AspectFill" Margin="10" Grid.Row="0" >
+                    <Image.Source>
+                        <UriImageSource Uri="{Binding PosterUrl}"></UriImageSource>
+                    </Image.Source>
+                </Image>
+                <Image Source="ShadowOverlay" Aspect="Fill" VerticalOptions="End" HorizontalOptions="Fill" Grid.RowSpan="2" />
 
                 <StackLayout Orientation="Horizontal"  VerticalOptions="Center"  Grid.Row="1" Spacing="5" Margin="10">
                     <Label Text="{Binding Summary}" Style="{StaticResource BodyLabel}"/>
                 </StackLayout>
             </Grid>
-
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

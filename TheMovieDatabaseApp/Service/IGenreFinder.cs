@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace TheMovieDatabaseApp.Service
 {
-    public interface IMovieFinder
+    public interface IGenreFinder
     {
-        Task<List<MovieDto>> GetPage(int page = 0);
+        Task<List<GenreDto>> GetAll();
     }
 }

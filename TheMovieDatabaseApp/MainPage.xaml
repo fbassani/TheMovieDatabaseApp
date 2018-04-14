@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:local="clr-namespace:TheMovieDatabaseApp"
-	xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
 	xmlns:converters="clr-namespace:TheMovieDatabaseApp.Converters;assembly=TheMovieDatabaseApp"
 	xmlns:behaviors="clr-namespace:TheMovieDatabaseApp.Behaviors;assembly=TheMovieDatabaseApp"
 	BackgroundColor="Black"
@@ -31,8 +30,11 @@
                                 <RowDefinition Height="AUTO"/>
                             </Grid.RowDefinitions>
 
-
-                            <Image Source="{Binding PosterUrl}" Aspect="AspectFill" Grid.RowSpan="2"/>
+                            <Image Aspect="AspectFill" Grid.RowSpan="2">
+                                <Image.Source>
+                                    <UriImageSource Uri="{Binding BackdropUrl}" CachingEnabled="True" />
+                                </Image.Source>
+                            </Image>
                             <Image Source="ShadowOverlay" Grid.RowSpan="2"  Aspect="Fill" VerticalOptions="End" HorizontalOptions="Fill" />
 
                             <Grid Margin="10" RowSpacing="10" ColumnSpacing="10" Grid.Row="1">
@@ -48,9 +50,9 @@
 
                                 <Label Text="{Binding Title}"  Grid.Row="0" Grid.ColumnSpan="3" Style="{StaticResource TitleLabel}" LineBreakMode="NoWrap"/>
 
-                                <Label Text="{Binding Genre}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Center" Style="{StaticResource GenreAndDateLabel}" />
+                                <Label Text="{Binding Genre}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="StartAndExpand" Style="{StaticResource GenreAndDateLabel}" />
 
-                                <StackLayout Orientation="Horizontal"  VerticalOptions="Center" Grid.Column="2" Grid.Row="1" Spacing="5">
+                                <StackLayout Orientation="Horizontal"  VerticalOptions="StartAndExpand" Grid.Column="2" Grid.Row="1" Spacing="5">
                                     <Label Text="Release date" Style="{StaticResource BodyLabel}"/>
                                     <Label Text="{Binding ReleaseDate, StringFormat='{0:MM/dd/yyyy}'}" Style="{StaticResource GenreAndDateLabel}" />
                                     

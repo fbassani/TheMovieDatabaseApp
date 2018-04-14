@@ -15,7 +15,7 @@ namespace TheMovieDatabaseApp.ViewModel
 
         public TaskRunWrapper<List<Movie>> Movies { get; set; }
 
-        public MainPageViewModel(INavigation navigation) : this(navigation, new MovieDataSource(new MovieFinder())) { }
+        public MainPageViewModel(INavigation navigation) : this(navigation, new MovieDataSource(new MovieFinder("https://api.themoviedb.org/3", "1f54bd990f1cdfb230adb312546d765d"), new GenreFinder("https://api.themoviedb.org/3", "1f54bd990f1cdfb230adb312546d765d"))) { }
 
         public MainPageViewModel(INavigation navigation, IMovieDataSource movieDataSource)
         {
