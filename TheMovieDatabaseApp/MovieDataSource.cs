@@ -10,6 +10,7 @@ namespace TheMovieDatabaseApp
     {
         private readonly IMovieFinder _movieFinder;
         private readonly IGenreFinder _genreFinder;
+        private List<GenreDto> _genres;
 
         public MovieDataSource(IMovieFinder movieFinder, IGenreFinder genreFinder)
         {
@@ -17,11 +18,11 @@ namespace TheMovieDatabaseApp
             _genreFinder = genreFinder;
         }
 
-        public async Task<List<Movie>> GetMovies()
+        public async Task<List<Movie>> GetMovies(int page)
         {
-            var genres = await _genreFinder.GetAll();
-            var movies = await _movieFinder.GetPage();
-            var result = DtoToModelMapper.Map(movies, genres);
+            _genres = _genres ?? await _genreFinder.GetAll();
+            var movies = await _movieFinder.GetPage(page);
+            var result = DtoToModelMapper.Map(movies, _genres);
             return result.ToList();
         }
     }

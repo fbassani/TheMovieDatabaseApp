@@ -26,22 +26,27 @@ namespace TheMovieDatabaseApp.Tests
         [Test]
         public async Task GetMovies_ShouldGetGenres()
         {
-            await _movieDataSource.GetMovies();
+            await GetMovies();
             _genreFinderMock.Verify(g => g.GetAll());
         }
 
         [Test]
         public async Task GetMovies_ShouldGetMovies()
         {
-            await _movieDataSource.GetMovies();
-            _movieFinderMock.Verify(g => g.GetPage(0));
+            await GetMovies();
+            _movieFinderMock.Verify(g => g.GetPage(1));
         }
 
         [Test]
         public async Task GetMovies_ShouldReturnListOfMovies()
         {
-            var result = await _movieDataSource.GetMovies();
+            var result = await GetMovies();
             Assert.IsInstanceOf<List<Movie>>(result);
+        }
+
+        private async Task<List<Movie>> GetMovies()
+        {
+            return await _movieDataSource.GetMovies(1);
         }
     }
 }

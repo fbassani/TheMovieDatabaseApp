@@ -10,5 +10,7 @@ namespace TheMovieDatabaseApp.Model
         public string PosterUrl { get; set; }
         public string BackdropUrl { get; set; }
         public DateTime ReleaseDate { get; set; }
+
+        public string ImageUrl => string.IsNullOrEmpty(BackdropUrl) ? PosterUrl : BackdropUrl;
     }
 }
