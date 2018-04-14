@@ -41,7 +41,8 @@ namespace TheMovieDatabaseApp.Tests.Service
                         new {overview = "overview"}
                     }
                 });
-                var dtos = await _movieFinder.GetPage();
+                var page = await _movieFinder.GetPage();
+                var dtos = page.Results;
                 Assert.AreEqual("overview", dtos[0].Overview);
             }
         }

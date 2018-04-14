@@ -60,7 +60,7 @@
     <Compile Include="Service\MovieFinder.cs" />
     <Compile Include="Service\MovieResultDto.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
-    <Compile Include="ViewModel\TaskRunWrapper.cs" />
+    <Compile Include="ViewModel\ViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Flurl, Version=2.7.1.0, Culture=neutral, processorArchitecture=MSIL">

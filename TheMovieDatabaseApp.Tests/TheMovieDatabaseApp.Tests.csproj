@@ -78,13 +78,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\SelectedItemEventArgsToSelectedItemConverterTests.cs" />
     <Compile Include="DtoToModelMapperTests.cs" />
     <Compile Include="MovieDataSourceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\GenreFinderTests.cs" />
     <Compile Include="Service\MovieFinderTests.cs" />
     <Compile Include="ViewModel\MainPageViewModelTests.cs" />
-    <Compile Include="ViewModel\TaskRunWrapperTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TheMovieDatabaseApp\TheMovieDatabaseApp.csproj">

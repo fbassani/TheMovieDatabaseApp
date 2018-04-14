@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Flurl;
 using Flurl.Http;
 
@@ -18,12 +17,12 @@ namespace TheMovieDatabaseApp.Service
             _apiKey = apiKey;
         }
 
-        public async Task<List<MovieDto>> GetPage(int page = 1)
+        public async Task<MovieResultDto> GetPage(int page = 1)
         {
             var result = await _baseUrl.AppendPathSegment(Resource)
                 .SetQueryParams(new { api_key = _apiKey, page})
                 .GetJsonAsync<MovieResultDto>();
-            return result?.Results ?? new List<MovieDto>();
+            return result;
         }
 
     }

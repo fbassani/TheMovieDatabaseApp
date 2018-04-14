@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using TheMovieDatabaseApp.Model;
 
 namespace TheMovieDatabaseApp
 {
     public interface IMovieDataSource
     {
-        Task<List<Movie>> GetMovies(int page);
+        Task<MoviesPage> GetMovies(int page);
     }
 }

@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TheMovieDatabaseApp.Model;
@@ -10,22 +9,18 @@ using Xamarin.Forms.Extended;
 
 namespace TheMovieDatabaseApp.ViewModel
 {
-    public class MainPageViewModel : INotifyPropertyChanged
+    public class MainPageViewModel : ViewModel
     {
         private readonly IMovieDataSource _movieDataSource;
 
         private int _currentPage = 1;
-
+        private int _totalPages = 1;
 
         bool _isLoadingMore;
-        private string _firstMovieOfThePageImage;
 
-        bool IsLoadingMore
+        public bool IsLoadingMore
         {
-            get
-            {
-                return _isLoadingMore;
-            }
+            get => _isLoadingMore;
             set
             {
                 _isLoadingMore = value;
@@ -33,19 +28,21 @@ namespace TheMovieDatabaseApp.ViewModel
             }
         }
 
+        private bool _hasError;
+
+        public bool HasError
+        {
+            get => _hasError;
+            set
+            {
+                _hasError = value;
+                OnPropertyChanged(nameof(HasError));
+            }
+        }
+
         public ICommand MovieSelectedCommand { get; }
 
         public InfiniteScrollCollection<Movie> Movies { get; set; }
-
-        public string FirstMovieOfThePageImage
-        {
-            get => _firstMovieOfThePageImage;
-            set
-            {
-                _firstMovieOfThePageImage = value;
-                OnPropertyChanged(nameof(FirstMovieOfThePageImage));
-            }
-        }
 
 
         public MainPageViewModel(INavigation navigation) : this(navigation, new MovieDataSource(new MovieFinder("https://api.themoviedb.org/3", "1f54bd990f1cdfb230adb312546d765d"), new GenreFinder("https://api.themoviedb.org/3", "1f54bd990f1cdfb230adb312546d765d"))) { }
@@ -60,25 +57,29 @@ namespace TheMovieDatabaseApp.ViewModel
                 {
                     IsLoadingMore = true;
                     var movies = await GetMovies();
-                    FirstMovieOfThePageImage = movies[0].BackdropUrl;
+                    _totalPages = movies.TotalPages;
                     IsLoadingMore = false;
+                    HasError = false;
                     _currentPage++;
-                    return movies;
-                }
+                    return movies.Movies;
+                },
+                OnError = HandleError,
+                OnCanLoadMore = () => _currentPage <= _totalPages
             };
             Movies.LoadMoreAsync();
         }
 
-        private async Task<List<Movie>> GetMovies()
+        private async Task<MoviesPage> GetMovies()
         {
             return await _movieDataSource.GetMovies(_currentPage);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void HandleError(Exception exception)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            IsLoadingMore = false;
+            HasError = true;
         }
+
+
     }
 }

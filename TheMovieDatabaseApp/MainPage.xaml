@@ -13,6 +13,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid>
+        <Label Text="Oops. Something is not right. Please try again later." IsVisible="{Binding HasError}" Style="{StaticResource TitleLabel}"></Label>
         <ListView x:Name="MoviesList" BackgroundColor="Transparent" CachingStrategy="RecycleElement" RowHeight="200" ItemsSource="{Binding Movies}" SeparatorVisibility="None">
             <ListView.Behaviors>
                 <behaviors:MovieSelectedBehavior Command="{Binding MovieSelectedCommand}" Converter="{StaticResource SelectedItemConverter}" />
