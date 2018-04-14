@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Behaviors\MovieSelectedBehavior.cs" />
+    <Compile Include="Converters\PathToImageUrlConverter.cs" />
     <Compile Include="Converters\SelectedItemEventArgsToSelectedItemConverter .cs" />
     <Compile Include="DetailsPage.xaml.cs">
       <DependentUpon>DetailsPage.xaml</DependentUpon>
@@ -43,6 +44,7 @@
     <Compile Include="DtoToModelMapper.cs" />
     <Compile Include="IMovieDataSource.cs" />
     <Compile Include="Model\Movie.cs" />
+    <Compile Include="Model\MoviesPage.cs" />
     <Compile Include="MovieDataSource.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -59,6 +61,7 @@
     <Compile Include="Service\MovieDto.cs" />
     <Compile Include="Service\MovieFinder.cs" />
     <Compile Include="Service\MovieResultDto.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
   </ItemGroup>

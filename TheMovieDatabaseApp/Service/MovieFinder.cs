@@ -19,11 +19,9 @@ namespace TheMovieDatabaseApp.Service
 
         public async Task<MovieResultDto> GetPage(int page = 1)
         {
-            var result = await _baseUrl.AppendPathSegment(Resource)
+            return await _baseUrl.AppendPathSegment(Resource)
                 .SetQueryParams(new { api_key = _apiKey, page})
                 .GetJsonAsync<MovieResultDto>();
-            return result;
         }
-
     }
 }

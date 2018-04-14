@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TheMovieDatabaseApp.Model;
@@ -43,9 +42,9 @@ namespace TheMovieDatabaseApp.ViewModel
         public ICommand MovieSelectedCommand { get; }
 
         public InfiniteScrollCollection<Movie> Movies { get; set; }
-
-
-        public MainPageViewModel(INavigation navigation) : this(navigation, new MovieDataSource(new MovieFinder("https://api.themoviedb.org/3", "1f54bd990f1cdfb230adb312546d765d"), new GenreFinder("https://api.themoviedb.org/3", "1f54bd990f1cdfb230adb312546d765d"))) { }
+        
+        //TODO: use some dependency injection container 
+        public MainPageViewModel(INavigation navigation) : this(navigation, new MovieDataSource(new MovieFinder(Settings.ApiBaseUrl, Settings.ApiKey), new GenreFinder(Settings.ApiBaseUrl, Settings.ApiKey))) { }
 
         public MainPageViewModel(INavigation navigation, IMovieDataSource movieDataSource)
         {
@@ -79,7 +78,5 @@ namespace TheMovieDatabaseApp.ViewModel
             IsLoadingMore = false;
             HasError = true;
         }
-
-
     }
 }

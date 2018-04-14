@@ -1,9 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:TheMovieDatabaseApp.Converters;assembly=TheMovieDatabaseApp"
              x:Class="TheMovieDatabaseApp.DetailsPage"
              BackgroundImage="Background"
 	         Title = "The Movie Database" >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:PathToImageUrlConverter x:Key="PathToImageUrlConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView>
             <Grid RowSpacing="5" ColumnSpacing="0" Margin="10,5" >
@@ -15,7 +21,7 @@
 
                 <Image Aspect="AspectFill" Margin="5" Grid.Row="0" >
                     <Image.Source>
-                        <UriImageSource Uri="{Binding PosterUrl}" CachingEnabled="True" CacheValidity="5"/>
+                        <UriImageSource Uri="{Binding PosterPath, Converter={StaticResource PathToImageUrlConverter}}" CachingEnabled="True" CacheValidity="5"/>
                     </Image.Source>
                 </Image>
                 <StackLayout Orientation="Horizontal"  Grid.Row="1">

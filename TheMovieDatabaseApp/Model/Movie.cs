@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace TheMovieDatabaseApp.Model
 {
@@ -8,16 +7,11 @@ namespace TheMovieDatabaseApp.Model
         public string Title { get; set; }
         public string Overview { get; set; }
         public string Genre { get; set; }
-        public string PosterUrl { get; set; }
-        public string BackdropUrl { get; set; }
+        public string PosterPath { get; set; }
+        public string BackdropPath { get; set; }
         public DateTime ReleaseDate { get; set; }
 
-        public string ImageUrl => string.IsNullOrEmpty(BackdropUrl) ? PosterUrl : BackdropUrl;
-    }
+        public string ImagePath => string.IsNullOrEmpty(BackdropPath) ? PosterPath : BackdropPath;
 
-    public class MoviesPage
-    {
-        public int TotalPages { get; set; }
-        public List<Movie> Movies { get; set; }
     }
 }

@@ -78,6 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\PathToImageUrlConverterTests.cs" />
     <Compile Include="Converters\SelectedItemEventArgsToSelectedItemConverterTests.cs" />
     <Compile Include="DtoToModelMapperTests.cs" />
     <Compile Include="MovieDataSourceTests.cs" />

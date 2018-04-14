@@ -23,13 +23,13 @@ namespace TheMovieDatabaseApp.Tests
         [Test]
         public void Map_ShouldMapBackdropUrl()
         {
-            StringAssert.EndsWith(GetMovieProperty(m => m.Backdrop_Path), _mappedMovie.BackdropUrl);
+            StringAssert.EndsWith(GetMovieProperty(m => m.Backdrop_Path), _mappedMovie.BackdropPath);
         }
 
         [Test]
         public void Map_ShouldMapPosterUrl()
         {
-            StringAssert.EndsWith(GetMovieProperty(m => m.Poster_Path), _mappedMovie.PosterUrl);
+            StringAssert.EndsWith(GetMovieProperty(m => m.Poster_Path), _mappedMovie.PosterPath);
         }
 
         [Test]
