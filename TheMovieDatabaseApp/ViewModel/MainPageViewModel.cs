@@ -40,6 +40,7 @@ namespace TheMovieDatabaseApp.ViewModel
         }
 
         public bool NetworkUnavailable => !App.IsNetworkAvailabe();
+        public bool NetworkAvailable => !NetworkUnavailable;
 
         public ICommand MovieSelectedCommand { get; }
 
@@ -59,13 +60,13 @@ namespace TheMovieDatabaseApp.ViewModel
                     IsLoadingMore = true;
                     var movies = await GetMoviesAsync();
                     _totalPages = movies.TotalPages;
-                    IsLoadingMore = false;
+                    IsLoadingMore = NetworkAvailable;
                     HasError = false;
                     _currentPage++;
                     return movies.Movies;
                 },
                 OnError = HandleError,
-                OnCanLoadMore = () => !NetworkUnavailable && _currentPage <= _totalPages
+                OnCanLoadMore = () => NetworkAvailable && _currentPage <= _totalPages
             };
             Movies.LoadMoreAsync();
         }

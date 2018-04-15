@@ -34,6 +34,14 @@ namespace TheMovieDatabaseApp.Tests.ViewModel
             return _viewModel.NetworkUnavailable;
         }
 
+        [TestCase(true, ExpectedResult = true)]
+        [TestCase(false, ExpectedResult = false)]
+        public bool NetworkAvailable_ShouldReturnIfNetworkAvailable(bool isAvailable)
+        {
+            App.IsNetworkAvailabe = () => isAvailable;
+            return _viewModel.NetworkAvailable;
+        }
+
         //TODO: how to test this?
         //[Test]
         //public void MovieSelectedCommand_WhenExecuted_ShouldPushDetailsPage()
