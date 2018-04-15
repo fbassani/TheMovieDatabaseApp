@@ -31,14 +31,14 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            
+
                             <Image Aspect="AspectFill" Grid.RowSpan="2">
                                 <Image.Source>
                                     <UriImageSource Uri="{Binding ImagePath, Converter={StaticResource PathToImageUrlConverter}}" CachingEnabled="True" CacheValidity="5"/>
                                 </Image.Source>
                             </Image>
 
-                            <Grid Margin="10" RowSpacing="10" ColumnSpacing="10" Grid.Row="1">
+                            <Grid RowSpacing="10" ColumnSpacing="10" Grid.Row="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="25"/>
@@ -48,13 +48,19 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-
-                                <Label Text="{Binding Title}"  Grid.Row="0" Grid.ColumnSpan="3" Style="{StaticResource TitleLabel}" LineBreakMode="NoWrap"/>
-                                <Label Text="{Binding Genre}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="StartAndExpand" Style="{StaticResource GenreAndDateLabel}" />
-                                <StackLayout Orientation="Horizontal"  VerticalOptions="StartAndExpand" Grid.Column="2" Grid.Row="1" Spacing="5">
-                                    <Label Text="Release date" Style="{StaticResource BodyLabel}"/>
-                                    <Label Text="{Binding ReleaseDate, StringFormat='{0:MM/dd/yyyy}'}" Style="{StaticResource GenreAndDateLabel}" />
-                                </StackLayout>
+                                <BoxView Color="{StaticResource TranslucidDarkColor}" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3"/>
+                                <ContentView Grid.Row="0" Grid.ColumnSpan="3" Style="{StaticResource PaddedContentView}" >
+                                    <Label Text="{Binding Title}" Style="{StaticResource TitleLabel}" LineBreakMode="NoWrap"/>
+                                </ContentView>
+                                <ContentView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  Style="{StaticResource PaddedContentView}" >
+                                    <Label Text="{Binding Genre}" VerticalOptions="StartAndExpand" Style="{StaticResource GenreAndDateLabel}" />
+                                </ContentView>
+                                <ContentView Grid.Column="2" Grid.Row="1"  Style="{StaticResource PaddedContentView}">
+                                    <StackLayout Orientation="Horizontal"  VerticalOptions="StartAndExpand" Spacing="5">
+                                        <Label Text="Release date" Style="{StaticResource BodyLabel}"/>
+                                        <Label Text="{Binding ReleaseDate, StringFormat='{0:MM/dd/yyyy}'}" Style="{StaticResource GenreAndDateLabel}" />
+                                    </StackLayout>
+                                </ContentView>
                             </Grid>
                         </Grid>
                     </ViewCell>
