@@ -39,10 +39,13 @@ namespace TheMovieDatabaseApp.ViewModel
             }
         }
 
+        public bool NetworkUnavailable => !App.IsNetworkAvailabe();
+
+
         public ICommand MovieSelectedCommand { get; }
 
         public InfiniteScrollCollection<Movie> Movies { get; set; }
-        
+
         //TODO: use some dependency injection container 
         public MainPageViewModel(INavigation navigation) : this(navigation, new MovieDataSource(new MovieFinder(Settings.ApiBaseUrl, Settings.ApiKey), new GenreFinder(Settings.ApiBaseUrl, Settings.ApiKey))) { }
 
@@ -63,7 +66,7 @@ namespace TheMovieDatabaseApp.ViewModel
                     return movies.Movies;
                 },
                 OnError = HandleError,
-                OnCanLoadMore = () => _currentPage <= _totalPages
+                OnCanLoadMore = () => !NetworkUnavailable && _currentPage <= _totalPages
             };
             Movies.LoadMoreAsync();
         }

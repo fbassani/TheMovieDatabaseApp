@@ -24,9 +24,9 @@ namespace TheMovieDatabaseApp.Tests.Converters
         }
 
         [Test]
-        public void Convert_WithoutPath_ShouldThrowArgumentException()
+        public void Convert_WithoutPath_ShouldReturnNull()
         {
-            Assert.Throws<ArgumentException>(() => _converter.Convert(new object(), null, null, null));
+            Assert.IsNull(_converter.Convert(new object(), null, null, null));
         }
 
         [Test]

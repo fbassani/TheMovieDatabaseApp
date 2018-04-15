@@ -1,6 +1,6 @@
 ﻿namespace TheMovieDatabaseApp
 {
-    public class Settings
+    public static class Settings
     {
         public const string ApiBaseUrl = "https://api.themoviedb.org/3";
         public const string ApiKey = "1f54bd990f1cdfb230adb312546d765d";

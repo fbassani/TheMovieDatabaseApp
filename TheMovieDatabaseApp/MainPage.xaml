@@ -14,7 +14,9 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid>
-        <Label Text="Oops. Something is not right. Please try again later." IsVisible="{Binding HasError}" Style="{StaticResource TitleLabel}"></Label>
+        <StackLayout IsVisible="{Binding NetworkUnavailable}" VerticalOptions="Center">
+            <Label Text="Can't access the internet" IsVisible="{Binding NetworkUnavailable}" Style="{StaticResource TitleLabel}"  HorizontalTextAlignment="Center"/>
+        </StackLayout>
         <ListView x:Name="MoviesList" BackgroundColor="Transparent" CachingStrategy="RecycleElement" RowHeight="200" ItemsSource="{Binding Movies}" SeparatorVisibility="None">
             <ListView.Behaviors>
                 <behaviors:MovieSelectedBehavior Command="{Binding MovieSelectedCommand}" Converter="{StaticResource SelectedItemConverter}" />
@@ -60,6 +62,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.Footer>
+                <!--<Label Text="Oops. Something is not right. Please try again later." IsVisible="{Binding HasError}" Style="{StaticResource TitleLabel}" />-->
                 <Grid Padding="4" IsVisible="{Binding IsLoadingMore}">
                     <Grid.Triggers>
                         <Trigger TargetType="Grid" Property="IsVisible" Value="False">

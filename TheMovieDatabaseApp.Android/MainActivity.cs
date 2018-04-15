@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Content.PM;
+using Android.Net;
 using Android.OS;
 using Xamarin.Forms.Platform.Android;
 
@@ -15,7 +16,16 @@ namespace TheMovieDatabaseApp.Android
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+            App.IsNetworkAvailabe = IsNetworkAvailable;
             LoadApplication(new App());
+        }
+
+        private bool IsNetworkAvailable()
+        {
+            var connectivityManager = (ConnectivityManager)GetSystemService(ConnectivityService);
+            var networkInfo = connectivityManager.ActiveNetworkInfo;
+            return networkInfo?.IsConnected ?? false;
         }
     }
 }

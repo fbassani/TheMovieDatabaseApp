@@ -9,11 +9,7 @@ namespace TheMovieDatabaseApp.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var path = value as string;
-            if (path == null)
-            {
-                throw new ArgumentException("Expected an image path");
-            }
-            return $"{Settings.ImagesBaseUrl}{path}";
+            return path == null ? null : $"{Settings.ImagesBaseUrl}{path}";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

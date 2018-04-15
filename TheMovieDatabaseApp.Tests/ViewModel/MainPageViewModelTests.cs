@@ -1,6 +1,5 @@
 ﻿using Moq;
 using NUnit.Framework;
-using TheMovieDatabaseApp.Model;
 using TheMovieDatabaseApp.ViewModel;
 using Xamarin.Forms;
 
@@ -15,6 +14,7 @@ namespace TheMovieDatabaseApp.Tests.ViewModel
         [SetUp]
         public void SetUp()
         {
+            App.IsNetworkAvailabe = () => true;
             _navigationMock = new Mock<INavigation>();
             _movieDataSourceMock = new Mock<IMovieDataSource>();
             _viewModel = new MainPageViewModel(_navigationMock.Object, _movieDataSourceMock.Object);
@@ -24,6 +24,14 @@ namespace TheMovieDatabaseApp.Tests.ViewModel
         public void ViewModel_OnLoad_ShouldGetMovies()
         {
             _movieDataSourceMock.Verify(m => m.GetMovies(1));
+        }
+
+        [TestCase(true, ExpectedResult = false)]
+        [TestCase(false, ExpectedResult = true)]
+        public bool NetworkUnavailable_ShouldReturnIfNetworkUnavailable(bool isAvailable)
+        {
+            App.IsNetworkAvailabe = () => isAvailable;
+            return _viewModel.NetworkUnavailable;
         }
 
         //TODO: how to test this?

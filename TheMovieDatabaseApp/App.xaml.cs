@@ -1,9 +1,12 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace TheMovieDatabaseApp
 {
     public partial class App : Application
     {
+        public static Func<bool> IsNetworkAvailabe = () => true;
+
         public App()
         {
             InitializeComponent();
