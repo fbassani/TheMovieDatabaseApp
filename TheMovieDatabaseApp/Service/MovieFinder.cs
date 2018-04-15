@@ -17,7 +17,7 @@ namespace TheMovieDatabaseApp.Service
             _apiKey = apiKey;
         }
 
-        public async Task<MovieResultDto> GetPage(int page = 1)
+        public async Task<MovieResultDto> GetPageAsync(int page)
         {
             return await _baseUrl.AppendPathSegment(Resource)
                 .SetQueryParams(new { api_key = _apiKey, page})

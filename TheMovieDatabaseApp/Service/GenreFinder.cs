@@ -17,7 +17,7 @@ namespace TheMovieDatabaseApp.Service
             _apiKey = apiKey;
         }
 
-        public async Task<List<GenreDto>> GetAll()
+        public async Task<List<GenreDto>> GetAllAsync()
         {
             var result =  await _baseUrl.AppendPathSegment(Resource)
                  .SetQueryParams(new { api_key = _apiKey })

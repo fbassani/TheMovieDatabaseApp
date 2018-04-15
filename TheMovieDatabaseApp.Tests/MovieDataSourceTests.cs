@@ -17,36 +17,36 @@ namespace TheMovieDatabaseApp.Tests
         public void SetUp()
         {
             _movieFinderMock = new Mock<IMovieFinder>();
-            _movieFinderMock.Setup(m => m.GetPage(It.IsAny<int>())).ReturnsAsync(new MovieResultDto { Results = new List<MovieDto>()});
+            _movieFinderMock.Setup(m => m.GetPageAsync(It.IsAny<int>())).ReturnsAsync(new MovieResultDto { Results = new List<MovieDto>()});
             _genreFinderMock = new Mock<IGenreFinder>();
-            _genreFinderMock.Setup(g => g.GetAll()).ReturnsAsync(new List<GenreDto>());
+            _genreFinderMock.Setup(g => g.GetAllAsync()).ReturnsAsync(new List<GenreDto>());
             _movieDataSource = new MovieDataSource(_movieFinderMock.Object, _genreFinderMock.Object);
         }
 
         [Test]
         public async Task GetMovies_ShouldGetGenres()
         {
-            await GetMovies();
-            _genreFinderMock.Verify(g => g.GetAll());
+            await GetMoviesAsync();
+            _genreFinderMock.Verify(g => g.GetAllAsync());
         }
 
         [Test]
         public async Task GetMovies_ShouldGetMovies()
         {
-            await GetMovies();
-            _movieFinderMock.Verify(g => g.GetPage(1));
+            await GetMoviesAsync();
+            _movieFinderMock.Verify(g => g.GetPageAsync(1));
         }
 
         [Test]
         public async Task GetMovies_ShouldReturnMoviesPage()
         {
-            var result = await GetMovies();
+            var result = await GetMoviesAsync();
             Assert.IsInstanceOf<MoviesPage>(result);
         }
 
-        private async Task<MoviesPage> GetMovies()
+        private async Task<MoviesPage> GetMoviesAsync()
         {
-            return await _movieDataSource.GetMovies(1);
+            return await _movieDataSource.GetMoviesAsync(1);
         }
     }
 }

@@ -41,7 +41,6 @@ namespace TheMovieDatabaseApp.ViewModel
 
         public bool NetworkUnavailable => !App.IsNetworkAvailabe();
 
-
         public ICommand MovieSelectedCommand { get; }
 
         public InfiniteScrollCollection<Movie> Movies { get; set; }
@@ -58,7 +57,7 @@ namespace TheMovieDatabaseApp.ViewModel
                 OnLoadMore = async () =>
                 {
                     IsLoadingMore = true;
-                    var movies = await GetMovies();
+                    var movies = await GetMoviesAsync();
                     _totalPages = movies.TotalPages;
                     IsLoadingMore = false;
                     HasError = false;
@@ -71,9 +70,9 @@ namespace TheMovieDatabaseApp.ViewModel
             Movies.LoadMoreAsync();
         }
 
-        private async Task<MoviesPage> GetMovies()
+        private async Task<MoviesPage> GetMoviesAsync()
         {
-            return await _movieDataSource.GetMovies(_currentPage);
+            return await _movieDataSource.GetMoviesAsync(_currentPage);
         }
 
         private void HandleError(Exception exception)

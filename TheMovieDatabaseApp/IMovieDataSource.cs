@@ -5,6 +5,6 @@ namespace TheMovieDatabaseApp
 {
     public interface IMovieDataSource
     {
-        Task<MoviesPage> GetMovies(int page);
+        Task<MoviesPage> GetMoviesAsync(int page);
     }
 }

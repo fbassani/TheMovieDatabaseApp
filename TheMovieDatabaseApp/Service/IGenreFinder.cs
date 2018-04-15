@@ -5,6 +5,6 @@ namespace TheMovieDatabaseApp.Service
 {
     public interface IGenreFinder
     {
-        Task<List<GenreDto>> GetAll();
+        Task<List<GenreDto>> GetAllAsync();
     }
 }

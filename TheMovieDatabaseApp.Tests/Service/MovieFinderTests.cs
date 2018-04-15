@@ -19,18 +19,18 @@ namespace TheMovieDatabaseApp.Tests.Service
         }
 
         [Test]
-        public async Task GetPage_ShouldCallApi()
+        public async Task GetPageAsync_ShouldCallApi()
         {
             using (var httpTest = new HttpTest())
             {
-                await _movieFinder.GetPage(1);
+                await _movieFinder.GetPageAsync(1);
                 httpTest.ShouldHaveCalled($"{BaseUrl}{MovieFinder.Resource}?api_key={ApiKey}&page=1")
                     .WithVerb(HttpMethod.Get);
             }
         }
 
         [Test]
-        public async Task GetPage_ShouldReturnListOfMovieDto()
+        public async Task GetPageAync_ShouldReturnMovieResultDto()
         {
             using (var httpTest = new HttpTest())
             {
@@ -41,7 +41,7 @@ namespace TheMovieDatabaseApp.Tests.Service
                         new {overview = "overview"}
                     }
                 });
-                var page = await _movieFinder.GetPage();
+                var page = await _movieFinder.GetPageAsync(1);
                 var dtos = page.Results;
                 Assert.AreEqual("overview", dtos[0].Overview);
             }

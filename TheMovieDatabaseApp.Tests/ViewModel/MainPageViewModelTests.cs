@@ -23,7 +23,7 @@ namespace TheMovieDatabaseApp.Tests.ViewModel
         [Test]
         public void ViewModel_OnLoad_ShouldGetMovies()
         {
-            _movieDataSourceMock.Verify(m => m.GetMovies(1));
+            _movieDataSourceMock.Verify(m => m.GetMoviesAsync(1));
         }
 
         [TestCase(true, ExpectedResult = false)]
