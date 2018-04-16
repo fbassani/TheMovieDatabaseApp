@@ -24,8 +24,7 @@ namespace TheMovieDatabaseApp.Tests.Service
             using (var httpTest = new HttpTest())
             {
                 await _genreFinder.GetAllAsync();
-                httpTest.ShouldHaveCalled($"{BaseUrl}{GenreFinder.Resource}?api_key={ApiKey}")
-                    .WithVerb(HttpMethod.Get);
+                httpTest.ShouldHaveCalled($"{BaseUrl}{GenreFinder.Resource}?api_key={ApiKey}");
             }
         }
 

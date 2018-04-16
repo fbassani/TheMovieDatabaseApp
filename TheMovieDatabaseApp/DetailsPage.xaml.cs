@@ -16,6 +16,5 @@ namespace TheMovieDatabaseApp
         {
             BindingContext = movie;
         }
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TheMovieDatabaseApp.Model;
@@ -55,18 +56,11 @@ namespace TheMovieDatabaseApp.ViewModel
             MovieSelectedCommand = new Command<Movie>(async m => await navigation.PushAsync(new DetailsPage(m)));
             Movies = new InfiniteScrollCollection<Movie>
             {
-                OnLoadMore = async () =>
-                {
-                    IsLoadingMore = true;
-                    var movies = await GetMoviesAsync();
-                    _totalPages = movies.TotalPages;
-                    IsLoadingMore = NetworkAvailable;
-                    HasError = false;
-                    _currentPage++;
-                    return movies.Movies;
-                },
-                OnError = HandleError,
-                OnCanLoadMore = () => NetworkAvailable && _currentPage <= _totalPages
+                OnLoadMore = OnLoadMore,
+                OnError = OnError,
+                OnCanLoadMore = OnCanLoadMore,
+                OnBeforeLoadMore = OnBeforeLoadMore,
+                OnAfterLoadMore = OnAfterLoadMore
             };
             Movies.LoadMoreAsync();
         }
@@ -76,10 +70,34 @@ namespace TheMovieDatabaseApp.ViewModel
             return await _movieDataSource.GetMoviesAsync(_currentPage);
         }
 
-        private void HandleError(Exception exception)
+        public async Task<IEnumerable<Movie>> OnLoadMore()
+        {
+            var movies = await GetMoviesAsync();
+            _totalPages = movies.TotalPages;
+            _currentPage++;
+            return movies.Movies;
+        }
+
+        public void OnBeforeLoadMore()
+        {
+            IsLoadingMore = true;
+        }
+
+        public void OnAfterLoadMore()
+        {
+            IsLoadingMore = false;
+            HasError = false;
+        }
+
+        public void OnError(Exception exception)
         {
             IsLoadingMore = false;
             HasError = true;
+        }
+
+        public bool OnCanLoadMore()
+        {
+            return NetworkAvailable && _currentPage <= _totalPages;
         }
     }
 }
