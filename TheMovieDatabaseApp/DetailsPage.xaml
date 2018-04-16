@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:TheMovieDatabaseApp.Converters;assembly=TheMovieDatabaseApp"
+             x:Class="TheMovieDatabaseApp.DetailsPage"
+             BackgroundImage="Background"
+	         Title = "The Movie Database" >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:PathToImageUrlConverter x:Key="PathToImageUrlConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid RowSpacing="5" ColumnSpacing="0" Margin="10,5" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="500"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Image Aspect="AspectFill" Margin="5" Grid.Row="0" >
+                    <Image.Source>
+                        <UriImageSource Uri="{Binding PosterPath, Converter={StaticResource PathToImageUrlConverter}}" CachingEnabled="True" CacheValidity="5"/>
+                    </Image.Source>
+                </Image>
+                <StackLayout Grid.Row="1">
+                    <Label Text="{Binding Title}" Style="{StaticResource TitleLabel}" VerticalOptions="StartAndExpand"/>
+                    <BoxView HeightRequest="2" HorizontalOptions="FillAndExpand" Style="{StaticResource Separator}" />
+                    <Label Text="{Binding Genre}" Style="{StaticResource GenreAndDateLabel}"/>
+                    <Label Text="{Binding Overview}" Style="{StaticResource OverviewText}"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal"  Grid.Row="2">
+                    <Label Text="Release date" Style="{StaticResource OverviewText}"/>
+                    <Label Text="{Binding ReleaseDate, StringFormat='{0:MM/dd/yyyy}'}" Style="{StaticResource OverviewText}"/>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
