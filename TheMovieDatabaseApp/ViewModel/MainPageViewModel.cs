@@ -69,7 +69,7 @@ namespace TheMovieDatabaseApp.ViewModel
             return await _movieDataSource.GetMoviesAsync(_currentPage);
         }
 
-        public async Task<IEnumerable<Movie>> OnLoadMore()
+        internal async Task<IEnumerable<Movie>> OnLoadMore()
         {
             var movies = await GetMoviesAsync();
             _totalPages = movies.TotalPages;
@@ -77,24 +77,24 @@ namespace TheMovieDatabaseApp.ViewModel
             return movies.Movies;
         }
 
-        public void OnBeforeLoadMore()
+        internal void OnBeforeLoadMore()
         {
             IsLoadingMore = true;
         }
 
-        public void OnAfterLoadMore()
+        internal void OnAfterLoadMore()
         {
             IsLoadingMore = false;
             HasError = false;
         }
 
-        public void OnError(Exception exception)
+        internal void OnError(Exception exception)
         {
             IsLoadingMore = false;
             HasError = true;
         }
 
-        public bool OnCanLoadMore()
+        internal bool OnCanLoadMore()
         {
             return NetworkAvailable && _currentPage <= _totalPages;
         }
