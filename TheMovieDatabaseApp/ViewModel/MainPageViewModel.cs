@@ -15,8 +15,8 @@ namespace TheMovieDatabaseApp.ViewModel
 
         private int _currentPage = 1;
         private int _totalPages = 1;
-
-        bool _isLoadingMore;
+        private bool _isLoadingMore;
+        private bool _hasError;
 
         public bool IsLoadingMore
         {
@@ -27,8 +27,6 @@ namespace TheMovieDatabaseApp.ViewModel
                 OnPropertyChanged(nameof(IsLoadingMore));
             }
         }
-
-        private bool _hasError;
 
         public bool HasError
         {
@@ -41,6 +39,7 @@ namespace TheMovieDatabaseApp.ViewModel
         }
 
         public bool NetworkUnavailable => !App.IsNetworkAvailabe();
+
         public bool NetworkAvailable => !NetworkUnavailable;
 
         public ICommand MovieSelectedCommand { get; }
